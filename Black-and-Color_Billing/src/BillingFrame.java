@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,10 +18,18 @@ import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.IOException;
+import java.awt.event.InputEvent;
 
 public class BillingFrame {
 
-	private JFrame frame;
+	private JFrame frmBlackcolorSzamlazoProgram;
 	private JTable table;
 	private JTable table_1;
 	private JTable table_2;
@@ -29,60 +38,34 @@ public class BillingFrame {
 	private JTable table_5;
 
 	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-						if ("Windows".equals(info.getName())) {
-							UIManager.setLookAndFeel(info.getClassName());
-							break;
-						}
-					}
-					
-					BillingFrame window = new BillingFrame();
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the application.
 	 */
 	public BillingFrame() {
 		initialize();
+		frmBlackcolorSzamlazoProgram.setVisible(true);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setTitle("Black&Color szÃ¡mlÃ¡zÃ³ program BÃ‰TA v0.1");
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 1300, 800);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmBlackcolorSzamlazoProgram = new JFrame();
+		frmBlackcolorSzamlazoProgram.setTitle("Black&Color Szamlazo Program BETA v0.1");
+		frmBlackcolorSzamlazoProgram.setResizable(false);
+		frmBlackcolorSzamlazoProgram.setBounds(100, 100, 1600, 900);
+		frmBlackcolorSzamlazoProgram.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		JPanel panelMain = new JPanel();
-		frame.getContentPane().add(panelMain, BorderLayout.CENTER);
+		frmBlackcolorSzamlazoProgram.getContentPane().add(panelMain, BorderLayout.CENTER);
 		panelMain.setLayout(null);
 
-		JLabel lblSzmlzProgramBta = new JLabel("Black&Color szÃ¡mlÃ¡zÃ³ program BÃ‰TA v0.1");
-		lblSzmlzProgramBta.setBounds(34, 11, 332, 23);
+		JLabel lblSzmlzProgramBta = new JLabel("Black&Color Szamlazo Program BETA v0.1");
+		lblSzmlzProgramBta.setBounds(34, 11, 334, 23);
 		lblSzmlzProgramBta.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panelMain.add(lblSzmlzProgramBta);
 
-		JLabel lblAllRightsReserved = new JLabel("All rights reserved. SÃ³vÃ¡gÃ³ DÃ¡vid, Pusztai Csaba Â© 2018");
-		lblAllRightsReserved.setBounds(969, 744, 291, 14);
-		panelMain.add(lblAllRightsReserved);
-
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(34, 45, 1226, 500);
+		tabbedPane.setBounds(34, 45, 1510, 620);
 		panelMain.add(tabbedPane);
 
 		JPanel tabBudapest = new JPanel();
@@ -91,12 +74,13 @@ public class BillingFrame {
 		tabBudapest.setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 1221, 472);
+		scrollPane.setBounds(0, 0, 1505, 586);
 		tabBudapest.add(scrollPane);
 
 		table = new JTable();
 		table.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		table.setEditingRow(0);
 		table.setModel(new DefaultTableModel(
 				new Object[][] { { null, null, null, null, null, null, null, null, null, null },
 						{ null, null, null, null, null, null, null, null, null, null },
@@ -156,11 +140,11 @@ public class BillingFrame {
 
 		JPanel tabSarvar = new JPanel();
 		tabSarvar.setBackground(Color.WHITE);
-		tabbedPane.addTab("SÃ¡rvÃ¡r", null, tabSarvar, null);
+		tabbedPane.addTab("Sarvar", null, tabSarvar, null);
 		tabSarvar.setLayout(null);
 
 		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(0, 0, 1221, 472);
+		scrollPane_1.setBounds(0, 0, 1505, 586);
 		tabSarvar.add(scrollPane_1);
 
 		table_1 = new JTable();
@@ -220,73 +204,73 @@ public class BillingFrame {
 						"El\u0151z\u0151 havi sz\u00EDnes fekete", "Aktu\u00E1lis sz\u00EDnes fekete",
 						"El\u0151z\u0151 havi sz\u00EDnes sz\u00EDnes", "Aktu\u00E1lis sz\u00EDnes sz\u00EDnes" }));
 		scrollPane_1.setViewportView(table_1);
-		
-				JPanel tabLenovo = new JPanel();
-				tabLenovo.setBackground(Color.WHITE);
-				tabbedPane.addTab("SÃ¡rvÃ¡r Lenovo", null, tabLenovo, null);
-				tabLenovo.setLayout(null);
-				
-						JScrollPane scrollPane_5 = new JScrollPane();
-						scrollPane_5.setBounds(0, 0, 1221, 472);
-						tabLenovo.add(scrollPane_5);
-						
-								table_5 = new JTable();
-								table_5.setModel(new DefaultTableModel(
-										new Object[][] { { null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null },
-												{ null, null, null, null, null, null, null, null, null, null }, },
-										new String[] { "Black&Color n\u00E9v", "Eszk\u00F6z t\u00EDpus", "Sz\u00E9riasz\u00E1m", "IP-c\u00EDm",
-												"El\u0151z\u0151 havi csak fekete", "Aktu\u00E1lis csak fekete",
-												"El\u0151z\u0151 havi sz\u00EDnes fekete", "Aktu\u00E1lis sz\u00EDnes fekete",
-												"El\u0151z\u0151 havi sz\u00EDnes sz\u00EDnes", "Aktu\u00E1lis sz\u00EDnes sz\u00EDnes" }));
-								scrollPane_5.setViewportView(table_5);
+
+		JPanel tabLenovo = new JPanel();
+		tabLenovo.setBackground(Color.WHITE);
+		tabbedPane.addTab("Sarvar Levono", null, tabLenovo, null);
+		tabLenovo.setLayout(null);
+
+		JScrollPane scrollPane_5 = new JScrollPane();
+		scrollPane_5.setBounds(0, 0, 1505, 586);
+		tabLenovo.add(scrollPane_5);
+
+		table_5 = new JTable();
+		table_5.setModel(new DefaultTableModel(
+				new Object[][] { { null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null },
+						{ null, null, null, null, null, null, null, null, null, null }, },
+				new String[] { "Black&Color n\u00E9v", "Eszk\u00F6z t\u00EDpus", "Sz\u00E9riasz\u00E1m", "IP-c\u00EDm",
+						"El\u0151z\u0151 havi csak fekete", "Aktu\u00E1lis csak fekete",
+						"El\u0151z\u0151 havi sz\u00EDnes fekete", "Aktu\u00E1lis sz\u00EDnes fekete",
+						"El\u0151z\u0151 havi sz\u00EDnes sz\u00EDnes", "Aktu\u00E1lis sz\u00EDnes sz\u00EDnes" }));
+		scrollPane_5.setViewportView(table_5);
 
 		JPanel tabZala = new JPanel();
 		tabZala.setBackground(Color.WHITE);
@@ -294,7 +278,7 @@ public class BillingFrame {
 		tabZala.setLayout(null);
 
 		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(0, 0, 1221, 472);
+		scrollPane_2.setBounds(0, 0, 1505, 586);
 		tabZala.add(scrollPane_2);
 
 		table_2 = new JTable();
@@ -357,11 +341,11 @@ public class BillingFrame {
 
 		JPanel tabGyal = new JPanel();
 		tabGyal.setBackground(Color.WHITE);
-		tabbedPane.addTab("GyÃ¡l", null, tabGyal, null);
+		tabbedPane.addTab("Gyal", null, tabGyal, null);
 		tabGyal.setLayout(null);
 
 		JScrollPane scrollPane_3 = new JScrollPane();
-		scrollPane_3.setBounds(0, 0, 1221, 472);
+		scrollPane_3.setBounds(0, 0, 1505, 586);
 		tabGyal.add(scrollPane_3);
 
 		table_3 = new JTable();
@@ -424,11 +408,11 @@ public class BillingFrame {
 
 		JPanel tabPaty = new JPanel();
 		tabPaty.setBackground(Color.WHITE);
-		tabbedPane.addTab("PÃ¡ty", null, tabPaty, null);
+		tabbedPane.addTab("Paty", null, tabPaty, null);
 		tabPaty.setLayout(null);
 
 		JScrollPane scrollPane_4 = new JScrollPane();
-		scrollPane_4.setBounds(0, 0, 1221, 472);
+		scrollPane_4.setBounds(0, 0, 1505, 586);
 		tabPaty.add(scrollPane_4);
 
 		table_4 = new JTable();
@@ -489,36 +473,78 @@ public class BillingFrame {
 						"El\u0151z\u0151 havi sz\u00EDnes sz\u00EDnes", "Aktu\u00E1lis sz\u00EDnes sz\u00EDnes" }));
 		scrollPane_4.setViewportView(table_4);
 
-		JButton btnNewButton = new JButton("HozzÃ¡adÃ¡s");
+		JButton btnNewButton = new JButton("Hozzáadas");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnNewButton.setIcon(new ImageIcon("D:\\workspace\\Szamlazo\\img\\add.png"));
-		btnNewButton.setBounds(34, 569, 170, 50);
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnNewButton.setIcon(new ImageIcon(BillingFrame.class.getResource("/img/add.png")));
+		btnNewButton.setBounds(34, 723, 220, 60);
 		panelMain.add(btnNewButton);
 
-		JButton btnTrls = new JButton("TÃ¶rlÃ©s");
+		JButton btnTrls = new JButton("Törlés");
 		btnTrls.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnTrls.setIcon(new ImageIcon("D:\\workspace\\Szamlazo\\img\\remove.png"));
-		btnTrls.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnTrls.setBounds(244, 569, 170, 50);
+		btnTrls.setIcon(new ImageIcon(BillingFrame.class.getResource("/img/remove.png")));
+		btnTrls.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnTrls.setBounds(309, 722, 220, 60);
 		panelMain.add(btnTrls);
 
-		JButton btnSzerkeszts = new JButton("SzerkesztÃ©s");
-		btnSzerkeszts.setIcon(new ImageIcon("D:\\workspace\\Szamlazo\\img\\refresh.png"));
-		btnSzerkeszts.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnSzerkeszts.setBounds(454, 569, 170, 50);
+		JButton btnSzerkeszts = new JButton("Szerkesztés");
+		btnSzerkeszts.setIcon(new ImageIcon(BillingFrame.class.getResource("/img/refresh.png")));
+		btnSzerkeszts.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnSzerkeszts.setBounds(584, 723, 220, 60);
 		panelMain.add(btnSzerkeszts);
 
-		JButton btnSzlaGenerls = new JButton("SzÃ¡mla generÃ¡lÃ¡s  >>>");
-		btnSzlaGenerls.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnSzlaGenerls.setBounds(664, 569, 596, 50);
+		JButton btnSzlaGenerls = new JButton(" Számla generálása >>>");
+		btnSzlaGenerls.setIcon(new ImageIcon(BillingFrame.class.getResource("/img/bill.png")));
+		btnSzlaGenerls.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnSzlaGenerls.setBounds(859, 722, 685, 60);
 		panelMain.add(btnSzlaGenerls);
-	}
 
+		JMenuBar menuBar = new JMenuBar();
+		frmBlackcolorSzamlazoProgram.setJMenuBar(menuBar);
+
+		JMenu mnFile = new JMenu("Fájl");
+		menuBar.add(mnFile);
+
+		JMenuItem mntmAdatbzisFrisstse = new JMenuItem("Adatbázis frissítése");
+		mntmAdatbzisFrisstse.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
+		mnFile.add(mntmAdatbzisFrisstse);
+
+		JMenuItem mntmKorbbiSzmlk = new JMenuItem("Korábbi számlák");
+		mntmKorbbiSzmlk.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		mnFile.add(mntmKorbbiSzmlk);
+
+		JMenuItem mntmKilps = new JMenuItem("Kilépés");
+		mntmKilps.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		mnFile.add(mntmKilps);
+
+		JMenu mnSg = new JMenu("Súgó");
+		menuBar.add(mnSg);
+
+		JMenuItem mntmDokumentci = new JMenuItem("Dokumentáció");
+		mntmDokumentci.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK));
+		mnSg.add(mntmDokumentci);
+
+		JMenuItem mntmNvjegy = new JMenuItem("Névjegy");
+		mntmNvjegy.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
+		mntmNvjegy.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AboutFrame dialog = new AboutFrame();
+			}
+		});
+		mnSg.add(mntmNvjegy);
+	}
 }
