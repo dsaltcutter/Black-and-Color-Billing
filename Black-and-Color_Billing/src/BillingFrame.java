@@ -27,6 +27,8 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.event.InputEvent;
 
+import java.awt.Desktop;
+
 public class BillingFrame {
 
 	private JFrame frmBlackcolorSzamlazoProgram;
@@ -476,6 +478,7 @@ public class BillingFrame {
 		JButton btnNewButton = new JButton("Hozzáadas");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				AddRecordFrame arf = new AddRecordFrame(tabbedPane.getSelectedIndex());
 			}
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -486,6 +489,7 @@ public class BillingFrame {
 		JButton btnTrls = new JButton("Törlés");
 		btnTrls.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				DeleteRecordFrame drf = new DeleteRecordFrame();
 			}
 		});
 		btnTrls.setIcon(new ImageIcon(BillingFrame.class.getResource("/img/remove.png")));
@@ -494,6 +498,11 @@ public class BillingFrame {
 		panelMain.add(btnTrls);
 
 		JButton btnSzerkeszts = new JButton("Szerkesztés");
+		btnSzerkeszts.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				EditRecordFrame erf = new EditRecordFrame();
+			}
+		});
 		btnSzerkeszts.setIcon(new ImageIcon(BillingFrame.class.getResource("/img/refresh.png")));
 		btnSzerkeszts.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		btnSzerkeszts.setBounds(584, 723, 220, 60);
@@ -536,6 +545,16 @@ public class BillingFrame {
 
 		JMenuItem mntmDokumentci = new JMenuItem("Dokumentáció");
 		mntmDokumentci.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK));
+		mntmDokumentci.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					if (Desktop.isDesktopSupported()) {
+			            try {
+			                File myFile = new File("userdoc.pdf");
+			                Desktop.getDesktop().open(myFile);
+			            } catch (Exception ex) {}
+			        }
+				}
+			});
 		mnSg.add(mntmDokumentci);
 
 		JMenuItem mntmNvjegy = new JMenuItem("Névjegy");
