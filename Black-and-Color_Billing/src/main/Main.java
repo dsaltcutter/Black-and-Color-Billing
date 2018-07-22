@@ -1,8 +1,13 @@
+package main;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
+import ui.BillingFrame;
+
 public class Main {
 
+	static BillingFrame billingFrame;
+	
 	public static void main(String[] args) {
 
 		try {
@@ -16,9 +21,17 @@ public class Main {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-				
-		BillingFrame window = new BillingFrame();
+			
+		createMainFrame();
+		
 		
 	}
-
+	
+	public static void createMainFrame() {
+		billingFrame = new BillingFrame();
+	}
+	
+	public BillingFrame getBillingFrame() {
+		return billingFrame;
+	}
 }

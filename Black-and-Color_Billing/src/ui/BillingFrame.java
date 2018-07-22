@@ -1,3 +1,4 @@
+package ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -18,6 +19,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 import database.ConnectDB;
 
@@ -36,12 +38,26 @@ import java.awt.Desktop;
 public class BillingFrame {
 
 	private JFrame frmBlackcolorSzamlazoProgram;
-	private JTable table;
-	private JTable table_1;
-	private JTable table_2;
-	private JTable table_3;
-	private JTable table_4;
-	private JTable table_5;
+	
+	private JScrollPane scrollBudapest;
+	private JScrollPane scrollSarvar;
+	private JScrollPane scrollLenovo;
+	private JScrollPane scrollZala;
+	private JScrollPane scrollGyal;
+	private JScrollPane scrollPaty;
+	
+	private JTable tableBudapest;
+	private JTable tableSarvar;
+	private JTable tableZala;
+	private JTable tableGyal;
+	private JTable tablePaty;
+	private JTable tableLenovo;
+	private JTabbedPane tabbedPane;
+	
+	private String[] tableHeader = { "Black&Color név", "Eszköz típus", "Szériaszám", "IP-cím",
+			"Elõzõ havi csak fekete", "Aktuális csak fekete",
+			"Elõzõ havi színes fekete", "Aktuális színes fekete",
+			"Elõzõ havi színes színes", "Aktuális színes színes", "Fekete ár", "Színes ár"};
 	
 	private ConnectDB conn = new ConnectDB();
 
@@ -72,7 +88,7 @@ public class BillingFrame {
 		lblSzmlzProgramBta.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		panelMain.add(lblSzmlzProgramBta);
 
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBounds(34, 45, 1510, 620);
 		panelMain.add(tabbedPane);
 
@@ -81,111 +97,111 @@ public class BillingFrame {
 		tabbedPane.addTab("Budapest", null, tabBudapest, null);
 		tabBudapest.setLayout(null);
 
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(0, 0, 1505, 586);
-		tabBudapest.add(scrollPane);
+		scrollBudapest = new JScrollPane();
+		scrollBudapest.setBounds(0, 0, 1505, 586);
+		tabBudapest.add(scrollBudapest);
 
-		table = new JTable();
-		table.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		table.setEditingRow(0);
-		table.setModel(new DefaultTableModel(
+		tableBudapest = new JTable();
+		tableBudapest.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tableBudapest.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+		tableBudapest.setEditingRow(0);
+		tableBudapest.setModel(new DefaultTableModel(
 				conn.getTableBudapest(),
 				new String[] { "Black&Color n\u00E9v", "Eszk\u00F6z t\u00EDpus", "Sz\u00E9riasz\u00E1m", "IP-c\u00EDm",
 						"El\u0151z\u0151 havi csak fekete", "Aktu\u00E1lis csak fekete",
 						"El\u0151z\u0151 havi sz\u00EDnes fekete", "Aktu\u00E1lis sz\u00EDnes fekete",
 						"El\u0151z\u0151 havi sz\u00EDnes sz\u00EDnes", "Aktu\u00E1lis sz\u00EDnes sz\u00EDnes", "Fekete Ár", "Színes ár" }));
-		scrollPane.setViewportView(table);
+		scrollBudapest.setViewportView(tableBudapest);
 
 		JPanel tabSarvar = new JPanel();
 		tabSarvar.setBackground(Color.WHITE);
-		tabbedPane.addTab("Sarvar", null, tabSarvar, null);
+		tabbedPane.addTab("Sárvár", null, tabSarvar, null);
 		tabSarvar.setLayout(null);
 
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(0, 0, 1505, 586);
-		tabSarvar.add(scrollPane_1);
+		scrollSarvar = new JScrollPane();
+		scrollSarvar.setBounds(0, 0, 1505, 586);
+		tabSarvar.add(scrollSarvar);
 
-		table_1 = new JTable();
-		table_1.setModel(new DefaultTableModel(
+		tableSarvar = new JTable();
+		tableSarvar.setModel(new DefaultTableModel(
 				conn.getTableSarvar(),
 				new String[] { "Black&Color név", "Eszköz típus", "Szériaszám", "IP-cím",
 						"Elõzõ havi csak fekete", "Aktuális csak fekete",
 						"Elõzõ havi színes fekete", "Aktuális színes fekete",
 						"Elõzõ havi színes színes", "Aktuális színes színes", "Fekete ár", "Színes ár"}));
-		scrollPane_1.setViewportView(table_1);
+		scrollSarvar.setViewportView(tableSarvar);
 
 		JPanel tabLenovo = new JPanel();
 		tabLenovo.setBackground(Color.WHITE);
-		tabbedPane.addTab("Sarvar Levono", null, tabLenovo, null);
+		tabbedPane.addTab("Sárvár Levono", null, tabLenovo, null);
 		tabLenovo.setLayout(null);
 
-		JScrollPane scrollPane_5 = new JScrollPane();
-		scrollPane_5.setBounds(0, 0, 1505, 586);
-		tabLenovo.add(scrollPane_5);
+		scrollLenovo = new JScrollPane();
+		scrollLenovo.setBounds(0, 0, 1505, 586);
+		tabLenovo.add(scrollLenovo);
 
-		table_5 = new JTable();
-		table_5.setModel(new DefaultTableModel(
+		tableLenovo = new JTable();
+		tableLenovo.setModel(new DefaultTableModel(
 				conn.getTableLenovo(),
 				new String[] { "Black&Color név", "Eszköz típus", "Szériaszám", "IP-cím",
 						"Elõzõ havi csak fekete", "Aktuális csak fekete",
 						"Elõzõ havi színes fekete", "Aktuális színes fekete",
 						"Elõzõ havi színes színes", "Aktuális színes színes", "Fekete ár", "Színes ár"}));
-		scrollPane_5.setViewportView(table_5);
+		scrollLenovo.setViewportView(tableLenovo);
 
 		JPanel tabZala = new JPanel();
 		tabZala.setBackground(Color.WHITE);
 		tabbedPane.addTab("Zalaegerszeg", null, tabZala, null);
 		tabZala.setLayout(null);
 
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(0, 0, 1505, 586);
-		tabZala.add(scrollPane_2);
+		scrollZala = new JScrollPane();
+		scrollZala.setBounds(0, 0, 1505, 586);
+		tabZala.add(scrollZala);
 
-		table_2 = new JTable();
-		table_2.setModel(new DefaultTableModel(
+		tableZala = new JTable();
+		tableZala.setModel(new DefaultTableModel(
 				conn.getTableZala(),
 				new String[] { "Black&Color név", "Eszköz típus", "Szériaszám", "IP-cím",
 						"Elõzõ havi csak fekete", "Aktuális csak fekete",
 						"Elõzõ havi színes fekete", "Aktuális színes fekete",
 						"Elõzõ havi színes színes", "Aktuális színes színes", "Fekete ár", "Színes ár"}));
-		scrollPane_2.setViewportView(table_2);
+		scrollZala.setViewportView(tableZala);
 
 		JPanel tabGyal = new JPanel();
 		tabGyal.setBackground(Color.WHITE);
-		tabbedPane.addTab("Gyal", null, tabGyal, null);
+		tabbedPane.addTab("Gyál", null, tabGyal, null);
 		tabGyal.setLayout(null);
 
-		JScrollPane scrollPane_3 = new JScrollPane();
-		scrollPane_3.setBounds(0, 0, 1505, 586);
-		tabGyal.add(scrollPane_3);
+		scrollGyal = new JScrollPane();
+		scrollGyal.setBounds(0, 0, 1505, 586);
+		tabGyal.add(scrollGyal);
 
-		table_3 = new JTable();
-		table_3.setModel(new DefaultTableModel(
+		tableGyal = new JTable();
+		tableGyal.setModel(new DefaultTableModel(
 				conn.getTableGyal(),
 				new String[] { "Black&Color név", "Eszköz típus", "Szériaszám", "IP-cím",
 						"Elõzõ havi csak fekete", "Aktuális csak fekete",
 						"Elõzõ havi színes fekete", "Aktuális színes fekete",
 						"Elõzõ havi színes színes", "Aktuális színes színes", "Fekete ár", "Színes ár"}));
-		scrollPane_3.setViewportView(table_3);
+		scrollGyal.setViewportView(tableGyal);
 
 		JPanel tabPaty = new JPanel();
 		tabPaty.setBackground(Color.WHITE);
-		tabbedPane.addTab("Paty", null, tabPaty, null);
+		tabbedPane.addTab("Páty", null, tabPaty, null);
 		tabPaty.setLayout(null);
 
-		JScrollPane scrollPane_4 = new JScrollPane();
-		scrollPane_4.setBounds(0, 0, 1505, 586);
-		tabPaty.add(scrollPane_4);
+		scrollPaty = new JScrollPane();
+		scrollPaty.setBounds(0, 0, 1505, 586);
+		tabPaty.add(scrollPaty);
 
-		table_4 = new JTable();
-		table_4.setModel(new DefaultTableModel(
+		tablePaty = new JTable();
+		tablePaty.setModel(new DefaultTableModel(
 				conn.getTablePaty(),
 				new String[] { "Black&Color név", "Eszköz típus", "Szériaszám", "IP-cím",
 						"Elõzõ havi csak fekete", "Aktuális csak fekete",
 						"Elõzõ havi színes fekete", "Aktuális színes fekete",
 						"Elõzõ havi színes színes", "Aktuális színes színes", "Fekete ár", "Színes ár"}));
-		scrollPane_4.setViewportView(table_4);
+		scrollPaty.setViewportView(tablePaty);
 
 		JButton btnNewButton = new JButton("Hozzáadas");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -201,7 +217,10 @@ public class BillingFrame {
 		JButton btnTrls = new JButton("Törlés");
 		btnTrls.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				DeleteRecordFrame drf = new DeleteRecordFrame();
+				int row = getTable().getSelectedRow();
+				TableModel tm = getTable().getModel();
+				String[] adatok = {getTab(), tm.getValueAt(row, 0).toString(), tm.getValueAt(row, 1).toString(), tm.getValueAt(row, 2).toString()};
+				DeleteRecordFrame drf = new DeleteRecordFrame(adatok);
 			}
 		});
 		btnTrls.setIcon(new ImageIcon(BillingFrame.class.getResource("/img/remove.png")));
@@ -212,7 +231,10 @@ public class BillingFrame {
 		JButton btnSzerkeszts = new JButton("Szerkesztés");
 		btnSzerkeszts.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				EditRecordFrame erf = new EditRecordFrame();
+				int row = getTable().getSelectedRow();
+				TableModel tm = getTable().getModel();
+				String[] adatok = {getTab(), tm.getValueAt(row, 0).toString(), tm.getValueAt(row, 1).toString(), tm.getValueAt(row, 2).toString(), tm.getValueAt(row, 3).toString(), tm.getValueAt(row, 10).toString(), tm.getValueAt(row, 11).toString()};
+				UpdateRecordFrame erf = new UpdateRecordFrame(adatok);
 			}
 		});
 		btnSzerkeszts.setIcon(new ImageIcon(BillingFrame.class.getResource("/img/refresh.png")));
@@ -234,6 +256,11 @@ public class BillingFrame {
 
 		JMenuItem mntmAdatbzisFrisstse = new JMenuItem("Adatbázis frissítése");
 		mntmAdatbzisFrisstse.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
+		mntmAdatbzisFrisstse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				updateTables();
+			}
+		});
 		mnFile.add(mntmAdatbzisFrisstse);
 
 		JMenuItem mntmKorbbiSzmlk = new JMenuItem("Korábbi számlák");
@@ -277,5 +304,52 @@ public class BillingFrame {
 			}
 		});
 		mnSg.add(mntmNvjegy);
+	}
+	
+	public JTable getTable() {
+		int ind = tabbedPane.getSelectedIndex();
+		
+		switch (ind) {
+		case 0:	return tableBudapest;
+		case 1: return tableSarvar;
+		case 2: return tableLenovo;
+		case 3: return tableZala;
+		case 4: return tableGyal;
+		case 5: return tablePaty;
+		}
+		return null;
+	}
+	
+	public String getTab() {
+		int ind = tabbedPane.getSelectedIndex();
+		String selectedTab = "";
+		
+		switch (ind) {
+		case 0: selectedTab = "budapest"; break;
+		case 1: selectedTab = "sarvar"; break;
+		case 2: selectedTab = "lenovo"; break;
+		case 3: selectedTab = "zalaegerszeg"; break;
+		case 4: selectedTab = "gyal"; break;
+		case 5: selectedTab = "paty"; break;
+		}
+		return selectedTab;
+	}
+
+	public void updateTables() {
+		ConnectDB update = new ConnectDB();
+		tableBudapest.setModel(new DefaultTableModel(update.getTableBudapest(), tableHeader));
+		tableSarvar.setModel(new DefaultTableModel(update.getTableSarvar(), tableHeader));
+		tableLenovo.setModel(new DefaultTableModel(update.getTableLenovo(), tableHeader));
+		tableZala.setModel(new DefaultTableModel(update.getTableZala(), tableHeader));
+		tableGyal.setModel(new DefaultTableModel(update.getTableGyal(), tableHeader));
+		tablePaty.setModel(new DefaultTableModel(update.getTablePaty(), tableHeader));
+		
+		tableBudapest.repaint();
+		tableSarvar.repaint();
+		tableLenovo.repaint();
+		tableZala.repaint();
+		tableGyal.repaint();
+		tablePaty.repaint();
+		
 	}
 }
