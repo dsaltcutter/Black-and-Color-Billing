@@ -22,6 +22,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import database.ConnectDB;
+import main.BillingGeneratePDF;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
@@ -246,6 +247,11 @@ public class BillingFrame {
 		btnSzlaGenerls.setIcon(new ImageIcon(BillingFrame.class.getResource("/img/bill.png")));
 		btnSzlaGenerls.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnSzlaGenerls.setBounds(859, 722, 685, 60);
+		btnSzlaGenerls.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new NewBillFrame(getTab());
+			}
+		});
 		panelMain.add(btnSzlaGenerls);
 
 		JMenuBar menuBar = new JMenuBar();

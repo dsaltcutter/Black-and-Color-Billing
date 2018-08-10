@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import ui.SqlErrorFrame;
+
 public class ConnectDB {
 
 	Connection conn;
@@ -168,7 +170,7 @@ public class ConnectDB {
 			
 			conn.close();
 		} catch (Exception e) {
-			System.out.println();
+			new SqlErrorFrame(e);
 		}
 	}
 
